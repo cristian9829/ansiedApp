@@ -1,0 +1,71 @@
+@import "bootstrap.scss";
+$primary: #66eece;
+$secondary: #242424 ;
+
+//Home
+@import "home/header.scss";
+@import "home/plans.scss";
+@import "home/about.scss";
+
+
+.whatsapp-contact{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  img{
+    width: 60px;
+  }
+}
+
+
+
+
+.bg-primary{
+  background-color: $secondary;
+}
+
+.footer {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background-color: $secondary;
+  color: #fff;
+}
+
+.copyright {
+  background-color: darken($secondary, 10%);
+}
+
+
+
+
+#mainNav {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-family: Helvetica;
+  font-weight: bold;
+  .navbar-brand {
+      color: #fff;
+  }
+  .navbar-nav {
+      margin-top: 1rem;
+      li.nav-item {
+          a.nav-link {
+              color: #fff;
+              &:hover {
+                  color: $primary;
+              }
+              &:active,
+              &:focus {
+                  color: #fff;
+              }
+              &.active {
+                  color: $primary;
+              }
+          }
+      }
+  }
+  .navbar-toggler {
+      font-size: 80%;
+      padding: 0.8rem;
+  }
+}
