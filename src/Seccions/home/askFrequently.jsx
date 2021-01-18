@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from '../../img/faq/faq.png';
+
 import style from '../../assets/home/askFeq.scss';
 
 
@@ -9,7 +9,7 @@ const AskFrequenty = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-6 container-img">
-            <img src={Image} className="img-fluid"/>
+            
           </div>
           <div className="col-md-6 container-ask">
             <h1>Preguntas frecuentes</h1>

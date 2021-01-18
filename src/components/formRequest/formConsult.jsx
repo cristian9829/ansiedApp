@@ -3,20 +3,24 @@ import React, {Fragment, useState} from 'react';
 const FormConsult = ({setChangeform, setDataReady, setformState}) => {
 
   const [formConsult, setformConsult]= useState({
-    id: ""
+    email: "",
+    password:""
   });
 
-  var {id} = formConsult;
+  var {email, password} = formConsult;
 
   const setDataFormConsult = e =>{
     e.preventDefault();
-    if(id === ""){
+    if(email === "" || password === ""){
       setformState({
         error: true
       })
       return;
     }
-    var dataForm = {id}
+    var dataForm = {
+      email,
+      password
+    }
 
     setDataReady(dataForm)
   }
@@ -36,15 +40,27 @@ const FormConsult = ({setChangeform, setDataReady, setformState}) => {
       <form onSubmit={setDataFormConsult} className="form-signin">
         <div className="form-label-group">
           <input 
-            type="number" 
-            id="id" 
-            name="id"
+            type="email" 
+            id="email" 
+            name="email"
             className="form-control" 
-            placeholder="Cedula"  
+            placeholder="Correo"  
             onChange={getDataFormConsult}
-            value={id}  
+            value={email}  
           />
-          <label htmlFor="id">Cedula</label>
+          <label htmlFor="email">Correo</label>
+        </div>
+        <div className="form-label-group">
+          <input 
+            type="password" 
+            id="password" 
+            name="password"
+            className="form-control" 
+            placeholder="Contraseña"  
+            onChange={getDataFormConsult}
+            value={password}  
+          />
+          <label htmlFor="password">Contraseña</label>
         </div>
         <input value="Consultar resultado" className="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"/>
         <hr className="my-4" />

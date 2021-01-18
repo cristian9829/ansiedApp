@@ -1,42 +1,61 @@
 import React, {Fragment, useState, useEffect} from 'react';
+import clienteAxios from '../config/axios';
+import tokenAuth from '../config/token';
 
-const ResultTest = () => {
+const ResultTest = (props) => {
   
-  const [respuestas, setRespuestas] = useState(JSON.parse(localStorage.getItem("preguntas")))
 
   const [puntos, setPuntos] = useState([])
   const [resultadoTest, setResultadoTest] = useState(false)
+  const [usuario, setUsuario] = useState({})
   
+  const puntajeCal = respuestas =>{
+    var puntosData = [];
+      console.log(respuestas)
+      respuestas.map((data, index) =>{
+        if(index < respuestas.length){
+          puntosData.push(respuestas[index].points);
+        }
+      })
+
+      setPuntos(puntosData)
+
+      //Sumando los puntos
+      var resultado = 0;
+      puntosData.map(data =>{
+        resultado = resultado += Number(data);
+      })
+      
+      setResultadoTest(resultado)
+  }
 
   useEffect(() => {
-    var puntosData = [];
-    respuestas.map((data, index) =>{
-      if(index < respuestas.length){
-        puntosData.push(respuestas[index].points);
-      }
+
+    var token = localStorage.getItem("token");
+    if(token){
+      tokenAuth(token)
+    }
+    clienteAxios.get('/api/test')
+    .then((res) =>{
+      puntajeCal(res.data.dataResponse.dataTest[0].test)
+      console.log(res.data.dataResponse)
+      setUsuario(res.data.dataResponse.dataUsuario)
     })
-    setPuntos(puntosData)
+    .catch(err => console.log(err))
 
-    //Sumando los puntos
-    var resultado = 0;
-    puntosData.map(data =>{
-      resultado = resultado += Number(data);
-    })
-    setResultadoTest(resultado)
-  }, respuestas);
+  }, []);
 
-  
-
-  
-  
   return (
     <Fragment>
     <div className="container">
       <div className="row">
         <div className="col">
           <h1>Resultados Test</h1>
+          <p>Nombre: {usuario.name}</p>
+          <p>Email: {usuario.email}</p>
+          <p>Registro del test: {usuario.registro}</p>
           <p>Suma de los puntos Valoracion: {resultadoTest}</p>
-          {resultadoTest == 0 && resultadoTest <= 16 ? 
+          {resultadoTest >= 0 && resultadoTest <= 16 ? 
             <div>
               <h3>Tus resultados son:</h3>
               <span>A pesar de que en algunas ocasiones te encuentres más nervioso de lo habitual tu respuesta ante situaciones ansiosas es adecuada y dentro de lo esperable</span>
@@ -45,7 +64,7 @@ const ResultTest = () => {
             null
           }
 
-          {resultadoTest > 17 && resultadoTest <= 22 ? 
+          {resultadoTest >= 17 && resultadoTest <= 22 ? 
             <div>
               <h3>Tus resultados son:</h3>
               <span>Tus niveles de ansiedad se sitúan dentro del límite de normalidad. Pero ten cuidado, no te sobrecargues demasiado e intenta gestionar tu ansiedad cuando sientas que sus niveles empiezan a ser elevados. Recuerda que puedes contar con nuestra ayuda.</span>

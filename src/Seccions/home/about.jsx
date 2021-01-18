@@ -1,5 +1,5 @@
 import React from 'react';
-import ImgAbout from '../../img/about/about.png';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -9,7 +9,7 @@ const About = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-6">
-            <img src={ImgAbout} />
+            
           </div>
           <div className="col-md-6">
             <div className="container-about">

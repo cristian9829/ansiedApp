@@ -1,5 +1,7 @@
 import React, { Fragment, useState  } from 'react';
 import {Redirect} from 'react-router-dom';
+import clienteAxios from '../config/axios';
+import tokenAuth from '../config/token';
 
 const Test = ({preguntas}) => {
   const [redirectResults, setredirectResults] = useState(false)
@@ -29,8 +31,26 @@ const Test = ({preguntas}) => {
 
   const sendTest = (e) =>{
     e.preventDefault();
-    localStorage.setItem("preguntas",JSON.stringify(dataForm));
-    setredirectResults(true)
+
+    let hoy = new Date(); 
+    let test = {
+      test: dataForm,
+      creado: hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear()
+    }
+    console.log(test)
+    
+    var token = localStorage.getItem("token");
+    if(token){
+      tokenAuth(token)
+    }
+
+    clienteAxios.post('/api/test', test)
+    .then((res) =>{
+      console.log(res)
+      setredirectResults(true)
+    })
+    .catch(err => console.log(err))
+    
   }
   return (
     <div className="section__test">

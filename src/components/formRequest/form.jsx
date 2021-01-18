@@ -4,12 +4,14 @@ import FormConsult from './formConsult';
 import FormRegister from './formRegister';
 import Error from '../../components/ErrorForm/Error';
 import {Redirect} from 'react-router';
+import clienteAxios from '../../config/axios';
 
 const FormRequest = () => {
 
   const [formState, setformState]= useState({
     error: false,
-    redirectTest: false
+    redirectTest: false,
+    redirectResult: false
   });
 
   const [Changeform, setChangeform]= useState({
@@ -17,7 +19,7 @@ const FormRequest = () => {
   });
 
   
-  const { error,  redirectTest} = formState;
+  const { error,  redirectTest, redirectResult} = formState;
   const {newTest} = Changeform;
 
   
@@ -26,21 +28,28 @@ const FormRequest = () => {
 
   const setDataFormConsult = data =>{
     console.log(data)
-    var dataForm = JSON.stringify(data);
-    sessionStorage.setItem("ansiedApp", dataForm);
-    setformState({
-      redirectTest: true
+    clienteAxios.post('/api/auth', data)
+    .then((res) =>{
+      console.log(res)
+      var dataForm = JSON.stringify(data);
+      localStorage.setItem("token", res.data.token);
+      setformState({
+        redirectResult: true
+      })  
     })
+    .catch(err => console.log(err))
   }
 
   const setDataFormRegister = data =>{
-    console.log(data)
-
-    var dataForm = JSON.stringify(data);
-    sessionStorage.setItem("ansiedApp", dataForm);
-    setformState({
-      redirectTest: true
+    clienteAxios.post('/api/usuarios', data)
+    .then((res) =>{
+      console.log(res)
+      localStorage.setItem("token", res.data.token);
+      setformState({
+        redirectTest: true
+      })  
     })
+    .catch(err => console.log(err.response.data.msg))
   }
 
   return (  
@@ -75,6 +84,7 @@ const FormRequest = () => {
           </div>
         </div>
       </div>
+      {redirectResult ? <Redirect to="/result-test" /> : null}
       {redirectTest ? <Redirect to="/test" /> : null}
     </div>
   );

@@ -5,10 +5,11 @@ const FormRegister = ({setChangeform, setDataReady, setformState}) => {
 
   const [formRegister, setFormRegister] = useState({
     name: "",
-    id: ""
+    email: "",
+    password: ""
   })
 
-  const {name, id} = formRegister;
+  const {name, email, password} = formRegister;
 
   const getDataFormRegister = (e) =>{
     setformState({
@@ -22,14 +23,15 @@ const FormRegister = ({setChangeform, setDataReady, setformState}) => {
 
   const getdataForm = (e) =>{
     e.preventDefault();
-    if(name === "" || id === ""){
+    if(name === "" || email === "" || password === ""){
       setformState({
         error: true
       })
       return;
     }
     var dataForm = {
-      id,
+      email,
+      password,
       name
     }
     setDataReady(dataForm)
@@ -54,15 +56,28 @@ const FormRegister = ({setChangeform, setDataReady, setformState}) => {
 
         <div className="form-label-group">
           <input 
-            type="number" 
-            id="id" 
-            name="id"
+            type="email" 
+            id="email" 
+            name="email"
             className="form-control" 
-            placeholder="Cedula"  
+            placeholder="Correo"  
             onChange={getDataFormRegister}
-            value={id}  
+            value={email}  
           />
-          <label htmlFor="id">Cedula</label>
+          <label htmlFor="email">Correo</label>
+        </div>
+
+        <div className="form-label-group">
+          <input 
+            type="password" 
+            id="password" 
+            name="password"
+            className="form-control" 
+            placeholder="Contraseña"  
+            onChange={getDataFormRegister}
+            value={password}  
+          />
+          <label htmlFor="password">Contraseña</label>
         </div>
 
         <button onClick={getdataForm}  className="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Hacer test</button>
