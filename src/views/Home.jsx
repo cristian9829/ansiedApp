@@ -1,8 +1,8 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import Header from '../Seccions/home/header';
-import Plans from '../Seccions/home/plans';
-import About from '../Seccions/home/about';
-import AskFreq from '../Seccions/home/askFrequently';
+import img1 from '../assets/images/1.jpg';
+import img2 from '../assets/images/2.jpg';
+import img3 from '../assets/images/3.jpg';
 
 const Home = () => {
   return (

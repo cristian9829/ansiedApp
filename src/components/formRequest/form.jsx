@@ -6,7 +6,7 @@ import Error from '../../components/ErrorForm/Error';
 import {Redirect} from 'react-router';
 import clienteAxios from '../../config/axios';
 
-const FormRequest = () => {
+const FormRequest = ({changeBackground}) => {
 
   const [formState, setformState]= useState({
     error: false,
@@ -22,7 +22,7 @@ const FormRequest = () => {
   const { error,  redirectTest, redirectResult} = formState;
   const {newTest} = Changeform;
 
-  
+  changeBackground(Changeform)
 
   
 
@@ -41,6 +41,8 @@ const FormRequest = () => {
   }
 
   const setDataFormRegister = data =>{
+    console.log(data)
+    localStorage.setItem("data-user", JSON.stringify(data));
     clienteAxios.post('/api/usuarios', data)
     .then((res) =>{
       console.log(res)
@@ -49,7 +51,7 @@ const FormRequest = () => {
         redirectTest: true
       })  
     })
-    .catch(err => console.log(err.response.data.msg))
+    .catch(err => console.log(err))
   }
 
   return (  

@@ -38,7 +38,7 @@ const FormRegister = ({setChangeform, setDataReady, setformState}) => {
   }
   return (
     <Fragment>
-      <h5 className="card-title text-center">Hacer Test</h5>
+      <h5 className="card-title text-center">Registrar</h5>
       <form className="form-signin">
         <div className="form-label-group">
           <input 
