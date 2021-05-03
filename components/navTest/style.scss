@@ -1,0 +1,25 @@
+#nav-test{
+  display: flex;
+  align-items: center;
+  height: 60px;
+  .container-nav{
+    display: flex;
+    align-items: center;
+    p{margin: 0px;}
+    .container-banner{
+      width: 100%;
+      border: 2px solid grey;
+      border-radius: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      .banner{
+        height: 100%;
+        width:2%;
+        background: #4500a9;
+        border-radius: 20px;
+      }
+    }
+  }
+}

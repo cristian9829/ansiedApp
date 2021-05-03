@@ -1,0 +1,29 @@
+.section__home-about{
+  padding: 20px 0px;
+  margin: 20px 0px;
+  .col-md-6:nth-child(1){
+    display: flex;
+    justify-content: center;
+  }
+  .container-about{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    ul{
+      padding: 0px;
+      list-style: none;
+      li{
+        margin: 8px 0px;
+        font-size: 16px;
+        svg{
+          font-size: 10px;
+          color: #0A8CFF;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
